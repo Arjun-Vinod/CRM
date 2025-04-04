@@ -28,9 +28,9 @@ const upload = multer({
       'experienceCertificate': ['application/pdf']
     };
     
-    const fileType = req.body.fileType;
-    if (!allowedTypes[fileType].includes(file.mimetype)) {
-      return cb(new Error('Invalid file type'));
+    const fileType = file.fieldname; // Use file.fieldname instead of req.body.fileType
+    if (!allowedTypes[fileType] || !allowedTypes[fileType].includes(file.mimetype)) {
+      return cb(new Error(`Invalid file type for ${fileType}`));
     }
     cb(null, true);
   }
