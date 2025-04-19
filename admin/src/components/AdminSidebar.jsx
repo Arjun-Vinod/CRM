@@ -50,6 +50,20 @@ function AdminSidebar() {
               Leads
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/payments"
+              className={({ isActive }) =>
+                `block bg-primary text-white font-medium p-3 rounded transition-colors duration-200 ${
+                  isActive
+                    ? 'bg-secondary text-white'
+                    : 'hover:bg-secondary text-textDark'
+                }`
+              }
+            >
+              Payments
+            </NavLink>
+          </li>
         </ul>
       </div>
     </div>

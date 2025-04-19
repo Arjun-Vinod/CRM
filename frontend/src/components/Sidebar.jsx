@@ -1,5 +1,6 @@
+// src/components/Sidebar.jsx
 import React from 'react';
-import { FaHome, FaTachometerAlt, FaUserGraduate, FaBook, FaBars } from 'react-icons/fa';
+import { FaHome, FaTachometerAlt, FaUserGraduate, FaBook, FaMoneyBill } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 function Sidebar({ isOpen, setIsOpen }) {
@@ -7,36 +8,26 @@ function Sidebar({ isOpen, setIsOpen }) {
     { name: 'Home', icon: <FaHome />, path: '/' },
     { name: 'Dashboard', icon: <FaTachometerAlt />, path: '/dashboard' },
     { name: 'Admission', icon: <FaUserGraduate />, path: '/admission' },
-    { name: 'Courses', icon: <FaBook />, path: '/courses' },
+    { name: 'Courses', icon: <FaBook />, path: '/course-details' },
+    { name: 'Payment', icon: <FaMoneyBill />, path: '/payment' },
   ];
 
   return (
     <div
-      className={`fixed left-0 top-[56px] h-[calc(100vh-56px)] bg-gray-100 text-primary transition-all duration-300 z-10 shadow-lg ${
-        isOpen ? 'w-64' : 'w-16'
+      className={`fixed top-16 h-[calc(100vh-64px)] bg-white text-primary shadow-lg transition-all duration-300 z-10 ${
+        isOpen ? 'w-64' : 'w-0 overflow-hidden'
       }`}
     >
-      {/* Header with Toggle */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        {isOpen && <span className="text-xl font-semibold text-primary">Menu</span>}
-        <FaBars
-          className="cursor-pointer text-2xl text-primary hover:text-secondary"
-          onClick={() => setIsOpen(!isOpen)}
-        />
-      </div>
-
-      {/* Menu Items */}
-      <ul className="mt-4 space-y-2 px-2">
+      <ul className="mt-8 space-y-3 px-4">
         {menuItems.map((item) => (
           <li key={item.name}>
             <Link
               to={item.path}
-              className={`flex items-center w-full p-3 rounded-lg text-white bg-primary hover:bg-secondary transition-colors duration-200 ${
-                isOpen ? 'justify-start' : 'justify-center'
-              }`}
+              className="flex items-center p-2 rounded-md bg-gray-100 text-primary hover:bg-secondary hover:text-white transition-all duration-200"
+              onClick={() => setIsOpen(false)}
             >
               <span className="text-xl">{item.icon}</span>
-              {isOpen && <span className="ml-3 text-base">{item.name}</span>}
+              {isOpen && <span className="ml-4 text-base font-medium">{item.name}</span>}
             </Link>
           </li>
         ))}

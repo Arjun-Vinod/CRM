@@ -1,3 +1,4 @@
+// src/components/AuthModal.jsx
 import React from 'react';
 import axios from 'axios';
 
@@ -32,33 +33,33 @@ function AuthModal({ authModal, setAuthModal, setUser }) {
   if (!authModal.open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg w-96 relative">
+    <div className="flex justify-center items-center h-full pointer-events-auto">
+      <div className="bg-white p-6 rounded-lg w-96 relative shadow-lg">
         <span
-          className="absolute top-2 right-4 text-2xl cursor-pointer"
+          className="absolute top-2 right-4 text-2xl cursor-pointer text-gray-600 hover:text-primary"
           onClick={() => setAuthModal({ open: false, type: authModal.type })}
         >
           ×
         </span>
         {authModal.type === 'login' ? (
           <div>
-            <h2 className="text-xl mb-4 text-center text-primary">Login</h2>
-            <form onSubmit={handleLogin} className="flex flex-col">
+            <h2 className="text-xl font-bold mb-4 text-center text-primary">Login</h2>
+            <form onSubmit={handleLogin} className="flex flex-col space-y-4">
               <input
                 type="email"
                 placeholder="Email"
-                className="mb-4 p-2 border rounded text-base"
+                className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
                 required
               />
               <input
                 type="password"
                 placeholder="Password"
-                className="mb-4 p-2 border rounded text-base"
+                className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
                 required
               />
               <button
                 type="submit"
-                className="bg-primary text-white p-2 rounded hover:bg-secondary text-base"
+                className="bg-primary text-white p-2 rounded hover:bg-secondary text-base font-medium"
               >
                 Login
               </button>
@@ -66,29 +67,29 @@ function AuthModal({ authModal, setAuthModal, setUser }) {
           </div>
         ) : (
           <div>
-            <h2 className="text-xl mb-4 text-center text-primary">Signup</h2>
-            <form onSubmit={handleSignup} className="flex flex-col">
+            <h2 className="text-xl font-bold mb-4 text-center text-primary">Signup</h2>
+            <form onSubmit={handleSignup} className="flex flex-col space-y-4">
               <input
                 type="text"
                 placeholder="Full Name"
-                className="mb-4 p-2 border rounded text-base"
+                className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
                 required
               />
               <input
                 type="email"
                 placeholder="Email"
-                className="mb-4 p-2 border rounded text-base"
+                className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
                 required
               />
               <input
                 type="password"
                 placeholder="Password"
-                className="mb-4 p-2 border rounded text-base"
+                className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
                 required
               />
               <button
                 type="submit"
-                className="bg-primary text-white p-2 rounded hover:bg-secondary text-base"
+                className="bg-primary text-white p-2 rounded hover:bg-secondary text-base font-medium"
               >
                 Signup
               </button>

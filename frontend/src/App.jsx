@@ -1,19 +1,23 @@
+// src/App.jsx
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AuthModal from './components/AuthModel';
-import ContactModal from './/components/ContactModel';
+import ContactModal from './components/ContactModel';
 import Sidebar from './components/Sidebar';
 import Courses from './components/Courses';
 import UploadDocuments from './components/UploadDocuments';
+import PaymentComponent from './components/PaymentComponent';
+import CourseComponent from './components/CourseComponent';
+// import Footer from './components/Footer';
 import axios from 'axios';
 
 function App() {
   const [authModal, setAuthModal] = useState({ open: false, type: 'login' });
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [user, setUser] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -27,22 +31,26 @@ function App() {
     fetchUser();
   }, []);
 
+  const isAnyModalOpen = authModal.open || contactModalOpen;
+
   return (
     <Router>
-      <div className="min-h-screen flex">
-        {/* Sidebar */}
-        <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+      <div className="min-h-screen flex flex-col bg-bgSoft">
+        {/* Navbar */}
+        <Navbar
+          setAuthModal={setAuthModal}
+          user={user}
+          setUser={setUser}
+          setSidebarOpen={setSidebarOpen}
+        />
 
-        {/* Main Content */}
+        {/* Main Layout with Dimming */}
         <div
-          className={`flex-1 transition-all duration-300 ${
-            sidebarOpen ? 'ml-64' : 'ml-16'
-          }`}
+          className={`flex flex-1 ${isAnyModalOpen ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}
         >
-          <Navbar setAuthModal={setAuthModal} user={user} setUser={setUser} />
-          <div className="pt-[56px]">
+          <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+          <main className="flex-1 pt-16">
             <Routes>
-              {/* Home Route */}
               <Route
                 path="/"
                 element={
@@ -52,10 +60,19 @@ function App() {
                   </>
                 }
               />
-              {/* Admission Route */}
               <Route path="/admission" element={<UploadDocuments />} />
+              <Route path="/payment" element={<PaymentComponent />} />
+              <Route path="/course-details" element={<CourseComponent />} />
             </Routes>
-          </div>
+          </main>
+        </div>
+
+        {/* Footer */}
+        {/* <Footer /> */}
+
+        {/* Modals */}
+        {isAnyModalOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div>}
+        <div className="fixed inset-0 z-50 pointer-events-none">
           <AuthModal authModal={authModal} setAuthModal={setAuthModal} setUser={setUser} />
           <ContactModal open={contactModalOpen} setOpen={setContactModalOpen} />
         </div>

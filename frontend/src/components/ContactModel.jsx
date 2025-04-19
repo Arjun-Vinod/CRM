@@ -1,3 +1,4 @@
+// src/components/ContactModal.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -28,42 +29,42 @@ function ContactModal({ open, setOpen }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg w-96 relative">
+    <div className="flex justify-center items-center h-full pointer-events-auto">
+      <div className="bg-white p-6 rounded-lg w-96 relative shadow-lg">
         <span
-          className="absolute top-2 right-4 text-2xl cursor-pointer"
+          className="absolute top-2 right-4 text-2xl cursor-pointer text-gray-600 hover:text-primary"
           onClick={() => setOpen(false)}
         >
           ×
         </span>
-        <h2 className="text-xl mb-4 text-center text-primary">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col">
+        <h2 className="text-xl font-bold mb-4 text-center text-primary">Contact Us</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <input
             type="text"
             placeholder="Full Name"
-            className="mb-4 p-2 border rounded text-base"
+            className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
             required
           />
           <input
             type="email"
             placeholder="Email"
-            className="mb-4 p-2 border rounded text-base"
+            className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
             required
           />
           <input
             type="tel"
             placeholder="Phone Number"
-            className="mb-4 p-2 border rounded text-base"
+            className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
             required
           />
           <input
             type="text"
             placeholder="Course Interested In"
-            className="mb-4 p-2 border rounded text-base"
+            className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
             required
           />
           <select
-            className="mb-4 p-2 border rounded text-base"
+            className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
             value={source}
             onChange={(e) => setSource(e.target.value)}
             required
@@ -76,12 +77,12 @@ function ContactModal({ open, setOpen }) {
           </select>
           <textarea
             placeholder="Message"
-            className="mb-4 p-2 border rounded text-base"
+            className="p-2 border rounded text-base focus:ring-2 focus:ring-secondary focus:border-transparent"
             required
           ></textarea>
           <button
             type="submit"
-            className="bg-primary text-white p-2 rounded hover:bg-secondary text-base"
+            className="bg-primary text-white p-2 rounded hover:bg-secondary text-base font-medium"
           >
             Submit
           </button>
